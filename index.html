@@ -1,68 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Car Engineer</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100vh;
+				font-family: "Arial", sans-serif;
+				background: linear-gradient(to bottom right, #5c258d, #4389a2);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Engineer</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right, #5c258d, #4389a2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+			.content {
+				text-align: center;
+				color: #fff;
+				padding: 20px;
+				border-radius: 10px;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
 
-        .content {
-            text-align: center;
-            color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+			h1 {
+				font-size: 2em;
+				margin-bottom: 20px;
+				font-family: "Press Start 2P", cursive;
+			}
 
-        h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+			p {
+				font-size: 1.2em;
+			}
 
-        p {
-            font-size: 1.2em;
-        }
+			svg {
+				width: 100px;
+				margin-top: 20px;
+				fill: #fff;
+			}
 
-        svg {
-            width: 100px;
-            margin-top: 20px;
-            fill: #fff;
-        }
+			.footer {
+				margin-top: 20px;
+				font-size: 0.8em;
+			}
 
-        .footer {
-            margin-top: 20px;
-            font-size: 0.8em;
-        }
-    </style>
-</head>
+			@keyframes blink {
+				0% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
 
-<body>
-    <div class="content">
-        <h1>Did You Know?</h1>
-        <p>When you drive a car you must be an engineer. Why? Because there is an engine near you.</p>
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
-            <path d="M3,3V21H21V3H3M5,5H19V19H5V5M12,7A3,3 0 0,1 15,10A3,3 0 0,1 12,13A3,3 0 0,1 9,10A3,3 0 0,1 12,7M7,14H10V22H7V14M14,14H17V22H14V14Z"></path>
-        </svg>
-        <div class="footer">
-            Website created by ChatGPT <br />
-            Joke created by Scott Deutsch <br />
-            &copy; <span id="currentYear"></span> Scott Deutsch
-        </div>
-    </div>
-    <script>
-        document.getElementById("currentYear").textContent = new Date().getFullYear();
-    </script>
-</body>
+			#cursor {
+				display: inline-block;
+				background-color: white;
+				width: 2px;
+				height: 1em;
+				animation: blink 1s infinite;
+			}
 
+			#text-to-type {
+				font-family: "Pacifico", cursive;
+				font-size: 24px; /* Adjust size as needed */
+			}
+		</style>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body>
+		<div class="content">
+			<h1>Did You Know?</h1>
+			<span id="text-to-type"></span><span id="cursor"></span>
+			<div>
+				<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+					<path
+						d="M3,3V21H21V3H3M5,5H19V19H5V5M12,7A3,3 0 0,1 15,10A3,3 0 0,1 12,13A3,3 0 0,1 9,10A3,3 0 0,1 12,7M7,14H10V22H7V14M14,14H17V22H14V14Z"
+					></path>
+				</svg>
+			</div>
+			<div class="footer">
+				Website created by ChatGPT <br />
+				Joke created by Scott Deutsch <br />
+				&copy; <span id="currentYear"></span> Scott Deutsch
+			</div>
+		</div>
+		<script>
+			document.getElementById("currentYear").textContent =
+				new Date().getFullYear()
+
+			let text =
+				"When you drive a car you must be an engineer. Why? Because there is an engine near you."
+			let index = 0
+
+			function typeText() {
+				if (index < text.length) {
+					document.getElementById("text-to-type").textContent +=
+						text.charAt(index)
+					index++
+					setTimeout(typeText, 50) // Adjust the speed of typing by changing the timeout value
+				} else {
+					// Remove cursor once typing is done
+					//document.getElementById("cursor").style.display = "none"
+				}
+			}
+
+			// Start typing after a delay (e.g., 1 second)
+			setTimeout(typeText, 1000)
+		</script>
+	</body>
 </html>
